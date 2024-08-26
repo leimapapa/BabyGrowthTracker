@@ -278,6 +278,7 @@
       let dateToUse;
       
       if (dueDateFromUrl) {
+      // Set dateInput value to the date from the URL and use it for calculations
       dateToUse = dueDateFromUrl;
       } else {
       const savedDate = localStorage.getItem("savedDate");
@@ -297,7 +298,7 @@
       function updateUrlDueDate(newDate) {
       const url = new URL(window.location);
       url.searchParams.set('dueDate', newDate);
-      window.history.replaceState({}, null, url.href);
+      window.history.replaceState({}, '', url);
       }
       
       // Store the date in local storage and update URL when the date is changed
@@ -310,6 +311,7 @@
       
       // Load the saved date or dueDate from the URL when the page loads
       loadSavedDate();
+      
       
     </script>
   </body>
