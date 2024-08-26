@@ -198,7 +198,7 @@
     </div>
     <div class="dateSection">
       <label for="dueDate">Due date:</label>
-      <input type="date" id="dueDate" value="2024-12-25">
+      <input type="date" id="dueDate" value="2025-3-12">
     </div>
     <script>
       const slider = document.getElementById("animationSlider");
@@ -278,8 +278,9 @@
       let dateToUse;
       
       if (dueDateFromUrl) {
-      // Set dateInput value to the date from the URL and use it for calculations
-      dateToUse = dueDateFromUrl;
+      // Format the due date from URL (expected format: YYYY-MM-DD)
+      const [year, month, day] = dueDateFromUrl.split('-').map(Number);
+      dateToUse = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
       } else {
       const savedDate = localStorage.getItem("savedDate");
       if (savedDate) {
@@ -311,7 +312,6 @@
       
       // Load the saved date or dueDate from the URL when the page loads
       loadSavedDate();
-      
       
     </script>
   </body>
