@@ -219,14 +219,13 @@
       
       // Calculate the target time
       let targetTime = duration * percentage;
-      if (targetTime == 0) { targetTime = 0.01; }
-      if (targetTime == 100) { targetTime = 99.9; }
+      if (targetTime <= 0) { targetTime = 0.01; }
+      if (targetTime >= 100) { targetTime = 99.9; }
       
       // Set the current time of the animation
       animation.ownerSVGElement.setCurrentTime(targetTime);
       
       // Freeze the animation
-      animation.beginElementAt(-targetTime);
       animation.ownerSVGElement.pauseAnimations();
       });
       }
@@ -238,6 +237,7 @@
       
       // Attach event listener to the slider
       scaleSlider.addEventListener('input', (event) => {
+      event.preventDefault();
       handleScaleChangeScale(event.target.value);
       });
       
