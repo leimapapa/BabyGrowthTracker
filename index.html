@@ -7,107 +7,127 @@
     <title>Baby Growth Tracker</title>
     <style>
       body {
-      background: rgb(50, 0, 108);
-      font-family: "Roboto", sans-serif;
-      margin: 0, auto;
+        background: rgb(50, 0, 108);
+        font-family: "Roboto", sans-serif;
+        margin: 0, auto;
       }
+
       #babyProgression {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      height: 100%;
-      width: 100%;
-      max-width: 100%;
-      max-height: calc(100% - 250px);
-      min-height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: calc(100% - 250px);
+        min-height: 100px;
       }
+
       .maskLine {
-      transition: d 310ms;
+        transition: d 310ms;
       }
+
       .maskLine:nth-of-type(2) {
-      transition: d 300ms;
+        transition: d 300ms;
       }
+
       .controls {
-      position: absolute;
-      top: 50%;
-      left: 15px;
-      transform: translate(0%, -50%);
-      height: calc(100vh - 6em);
-      max-height: 600px;
+        position: absolute;
+        top: calc(50% - 2em);
+        left: 15px;
+        transform: translate(0%, -50%);
+        height: calc(100vh - 6em);
+        max-height: 600px;
       }
+
       .slider {
-      position: absolute;
-      display: block;
-      top: 50%;
-      right: 15px;
-      transform: translate(0%, -50%);
-      width: 50px;
-      height: calc(100vh - 6em);
-      max-height: 600px;
+        position: absolute;
+        display: block;
+        top: calc(50% - 2em);
+        right: 15px;
+        transform: translate(0%, -50%);
+        width: 50px;
+        height: calc(100vh - 6em);
+        max-height: 600px;
       }
+
       #scaleSlider {
-      position: absolute;
-      width: calc(100vh - 6em);
-      max-width: 600px;
-      cursor: pointer;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-90deg);
+        position: absolute;
+        width: calc(100vh - 6em);
+        max-width: 600px;
+        cursor: pointer;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-90deg);
       }
+
       .container {
-      display: flex;
-      flex-direction: column;
-      width: 45px;
-      justify-content: space-between;
-      height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 45px;
+        justify-content: space-between;
+        height: 100%;
       }
+
       .container > button {
-      cursor: pointer;
-      color: rgba(255, 255, 255, 0.5);
-      background: none;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      flex: 1;
-      margin: 0px;
-      padding-top: 4px;
-      padding-bottom: 4px;
-      padding-left: 0px;
-      padding-right: 0px;
-      font-family: "Roboto", sans-serif;
-      font-weight: bold;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.5);
+        background: none;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        flex: 1;
+        margin: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-family: "Roboto", sans-serif;
+        font-weight: bold;
       }
+
+			.container > button:first-of-type {
+				border-radius: 25px 25px 0px 0px
+			}
+			.container > button:last-of-type {
+				border-radius: 0px 0px 25px 25px
+			}
       .container > button:hover,
       .container > button:focus,
       .container > button:active {
-      border: 1px solid #fff;
-      color: #fff;
+        border: 1px solid #fff;
+        color: #fff;
       }
+
       .container > button > span {
-      font-weight: 100;
-      font-size: 0.8em;
+        font-weight: 100;
+        font-size: 0.8em;
       }
+
       .daysSection {
-      text-align: center;
-      font-family: "Roboto", sans-serif;
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translate(-50%);
-      color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translate(-50%);
+        color: rgba(255, 255, 255, 0.8);
       }
+
       .days {
-      font-size: 1.5em;
-      font-weight: 600;
+        font-size: 1.5em;
+        font-weight: 600;
       }
+
       .dateSection {
-      text-align: center;
-      font-family: "Roboto", sans-serif;
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translate(-50%);
-      color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translate(-50%);
+        color: rgba(255, 255, 255, 0.8);
       }
+
       input[type="range"] {
       -webkit-appearance: none;
       appearance: none;
@@ -149,6 +169,100 @@
       border: 1px solid #a020f0;
       box-shadow: -407px 0 0 400px rgb(100, 0, 180);
       }
+
+      /* Date input styling */
+      #dueDate {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        color: white;
+        padding: 8px 12px;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.9em;
+        margin-top: 5px;
+      }
+
+      #dueDate::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        cursor: pointer;
+      }
+
+      /* Share button styling */
+      .share-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      .share-button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .share-menu {
+        position: absolute;
+        bottom: 60px;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 8px;
+        padding: 10px;
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 120px;
+      }
+
+      .share-menu button {
+        background: none;
+        border: none;
+        color: white;
+        padding: 8px;
+        cursor: pointer;
+        text-align: left;
+        border-radius: 4px;
+      }
+
+      .share-menu button:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .controls {
+          left: 5px;
+        }
+
+        .slider {
+          right: 5px;
+        }
+
+        .container > button {
+          width: 40px;
+          height: 40px;
+          font-size: 0.8em;
+        }
+
+        #dueDate {
+          font-size: 0.8em;
+          padding: 6px;
+        }
+
+        .daysSection {
+          font-size: 0.9em;
+          bottom: 5px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -175,6 +289,7 @@
         </path>
       </g>
     </svg>
+
     <div class="controls">
       <div class="container">
         <button onclick="setProgress(252)">40<br /><span>weeks</span></button>
@@ -189,133 +304,185 @@
         <button onclick="setProgress(0)">4<br /><span>weeks</span></button>
       </div>
     </div>
+
     <div class="slider">
       <input type="range" id="scaleSlider" min="0" max="252" step="1" value="0">
     </div>
+
     <div class="daysSection" title="Day of pregnancy">
-      <span>Day:</span>
-      <br />
-      <span class="days">&nbsp;</span>
+      <span class="days">&nbsp;</span><br>
+      <span id="weeksDisplay"></span>
     </div>
+
     <div class="dateSection">
       <label for="dueDate">Due date:</label>
       <input type="date" id="dueDate" value="2025-3-12">
     </div>
+
+    <div class="share-container">
+      <button class="share-button" onclick="toggleShareMenu()">
+      	<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      </button>
+      <div class="share-menu" id="shareMenu">
+        <button onclick="copyLink()">Copy Link</button>
+        <button onclick="shareLink()">Share</button>
+      </div>
+    </div>
+
     <script>
       const slider = document.getElementById("animationSlider");
       const scaleSlider = document.getElementById('scaleSlider');
       const dateInput = document.getElementById("dueDate");
-      
+
       // Function to handle slider change
       function handleScaleChangeScale(val) {
-      const percentage = (val / 252);
-      const animations = document.querySelectorAll("#babyProgression animate");
-      
-      document.querySelector('.days').textContent = parseInt(parseInt(val) + 28);
-      
-      // Change baby animations
-      animations.forEach((animation) => {
-      const duration = parseFloat(animation.getAttribute("dur")) || 50; // Default to 50 seconds if not specified
-      
-      // Calculate the target time
-      let targetTime = duration * percentage;
-      if (targetTime <= 0) { targetTime = 0.01; }
-      if (targetTime >= 100) { targetTime = 99.9; }
-      
-      // Set the current time of the animation
-      animation.ownerSVGElement.setCurrentTime(targetTime);
-      
-      // Freeze the animation
-      animation.ownerSVGElement.pauseAnimations();
-      });
+        const percentage = (val / 252);
+        const animations = document.querySelectorAll("#babyProgression animate");
+        const days = parseInt(val) + 28;
+
+        document.querySelector('.days').textContent = days;
+        updateWeeksDisplay(val);
+
+        // Change baby animations
+        animations.forEach((animation) => {
+          const duration = parseFloat(animation.getAttribute("dur")) || 50; // Default to 50 seconds if not specified
+
+          // Calculate the target time
+          let targetTime = duration * percentage;
+          if (targetTime <= 0) { targetTime = 0.01; }
+          if (targetTime >= 100) { targetTime = 99.9; }
+
+          // Set the current time of the animation
+          animation.ownerSVGElement.setCurrentTime(targetTime);
+
+          // Freeze the animation
+          animation.ownerSVGElement.pauseAnimations();
+        });
       }
-      
+
       function setProgress(num) {
-      scaleSlider.value = num;
-      handleScaleChangeScale(num);
+        scaleSlider.value = num;
+        handleScaleChangeScale(num);
       }
-      
+
       // Attach event listener to the slider
       scaleSlider.addEventListener('input', (event) => {
-      event.preventDefault();
-      handleScaleChangeScale(event.target.value);
+        event.preventDefault();
+        handleScaleChangeScale(event.target.value);
       });
-      
+
       function daysUntil(date) {
-      let targetDate;
-      if (typeof date === "string") {
-      const [year, month, day] = date.split("-").map(Number);
-      targetDate = new Date(year, month - 1, day); // Months are zero-based in JS
-      } else if (date instanceof Date) {
-      targetDate = date;
-      } else {
-      throw new Error(
-      "Invalid date format. Please provide a Date object or a string in YYYY-MM-DD format."
-      );
+        let targetDate;
+        if (typeof date === "string") {
+          const [year, month, day] = date.split("-").map(Number);
+          targetDate = new Date(year, month - 1, day); // Months are zero-based in JS
+        } else if (date instanceof Date) {
+          targetDate = date;
+        } else {
+          throw new Error(
+            "Invalid date format. Please provide a Date object or a string in YYYY-MM-DD format."
+          );
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const timeDiff = targetDate - today;
+        const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+        return daysDiff;
       }
-      
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      
-      const timeDiff = targetDate - today;
-      const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-      
-      return daysDiff;
-      }
-      
+
       function calculateDays(date) {
-      const days = daysUntil(date);
-      if ((252 - days) >= 0) {
-      setProgress(252 - days);
+        const days = daysUntil(date);
+        if ((252 - days) >= 0) {
+          setProgress(252 - days);
+        }
       }
-      }
-      
+
       // Load the saved date from local storage or URL if provided
       function loadSavedDate() {
-      // Check for dueDate in URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const dueDateFromUrl = urlParams.get("dueDate");
-      
-      let dateToUse;
-      
-      if (dueDateFromUrl) {
-      // Format the due date from URL (expected format: YYYY-MM-DD)
-      const [year, month, day] = dueDateFromUrl.split('-').map(Number);
-      dateToUse = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-      } else {
-      const savedDate = localStorage.getItem("savedDate");
-      if (savedDate) {
-      dateToUse = savedDate;
-      } else {
-      dateToUse = dateInput.value; // Default date if neither URL nor local storage has a value
+        // Check for dueDate in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const dueDateFromUrl = urlParams.get("dueDate");
+
+        let dateToUse;
+
+        if (dueDateFromUrl) {
+          // Format the due date from URL (expected format: YYYY-MM-DD)
+          const [year, month, day] = dueDateFromUrl.split('-').map(Number);
+          dateToUse = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+        } else {
+          const savedDate = localStorage.getItem("savedDate");
+          if (savedDate) {
+            dateToUse = savedDate;
+          } else {
+            dateToUse = dateInput.value; // Default date if neither URL nor local storage has a value
+          }
+        }
+
+        // Set the input value to the chosen date and calculate the days
+        dateInput.value = dateToUse;
+        calculateDays(dateToUse);
       }
-      }
-      
-      // Set the input value to the chosen date and calculate the days
-      dateInput.value = dateToUse;
-      calculateDays(dateToUse);
-      }
-      
+
       // Function to update the dueDate parameter in the URL
       function updateUrlDueDate(newDate) {
-      const url = new URL(window.location);
-      url.searchParams.set('dueDate', newDate);
-      window.history.replaceState({}, '', url);
+        const url = new URL(window.location);
+        url.searchParams.set('dueDate', newDate);
+        window.history.replaceState({}, '', url);
       }
-      
+
       // Store the date in local storage and update URL when the date is changed
       dateInput.addEventListener("input", (event) => {
-      const dateValue = event.target.value;
-      localStorage.setItem("savedDate", dateValue);
-      updateUrlDueDate(dateValue);
-      calculateDays(dateValue);
+        const dateValue = event.target.value;
+        localStorage.setItem("savedDate", dateValue);
+        updateUrlDueDate(dateValue);
+        calculateDays(dateValue);
       });
-      
+
       // Load the saved date or dueDate from the URL when the page loads
       loadSavedDate();
-      
+
+      // Update the days display to show weeks + days
+      function updateWeeksDisplay(days) {
+        const totalDays = parseInt(days) + 28;
+        const weeks = Math.floor(totalDays / 7);
+        const remainingDays = totalDays % 7;
+        document.getElementById('weeksDisplay').textContent =
+          `${weeks} weeks ${remainingDays} days`;
+      }
+
+      // Share functionality
+      function toggleShareMenu() {
+        const menu = document.getElementById('shareMenu');
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+      }
+
+      function copyLink() {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      }
+
+      async function shareLink() {
+        try {
+          await navigator.share({
+            title: 'Baby Growth Tracker',
+            url: window.location.href
+          });
+        } catch (err) {
+          copyLink();
+        }
+      }
+
+      // Close share menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.share-container')) {
+          document.getElementById('shareMenu').style.display = 'none';
+        }
+      });
     </script>
-    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+		<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
 	<script>
 		kofiWidgetOverlay.draw('leimapapa', {
 			'type': 'floating-chat',
