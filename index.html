@@ -416,6 +416,7 @@
           const savedDate = localStorage.getItem("savedDate");
           if (savedDate) {
             dateToUse = savedDate;
+	    updateUrlDueDate(dateToUse);
           } else {
             dateToUse = dateInput.value; // Default date if neither URL nor local storage has a value
           }
