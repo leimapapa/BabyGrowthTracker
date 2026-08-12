@@ -523,113 +523,8 @@
 		const slider = document.getElementById("animationSlider");
 		const scaleSlider = document.getElementById("scaleSlider");
 		const dateInput = document.getElementById("dueDate");
-		// Function to handle slider change
-		function handleScaleChangeScale(val) {
-			const percentage = val / 252;
-			const animations = document.querySelectorAll("#babyProgression animate");
-			const days = parseInt(val) + 28;
-			document.querySelector(".days").textContent = days;
-			updateWeeksDisplay(val);
-			// Change baby animations
-			animations.forEach((animation) => {
-				const duration = parseFloat(animation.getAttribute("dur")) || 50; // Default to 50 seconds if not specified
-				// Calculate the target time
-				let targetTime = duration * percentage;
-				if (targetTime <= 0) {
-					targetTime = 0.01;
-				}
-				if (targetTime >= 100) {
-					targetTime = 99.9;
-				}
-				// Set the current time of the animation
-				animation.ownerSVGElement.setCurrentTime(targetTime);
-				// Freeze the animation
-				animation.ownerSVGElement.pauseAnimations();
-			});
-		}
-
-		function setProgress(num) {
-			scaleSlider.value = num;
-			handleScaleChangeScale(num);
-		}
-		const weekBtns = document.querySelectorAll('.container button');
-		weekBtns.forEach((btn) => {
-			btn.addEventListener("click", (event) => {
-				document.querySelector(".resetBtn").classList.add("resetVisible");
-			});
-		});
-		// Attach event listener to the slider
-		scaleSlider.addEventListener("input", (event) => {
-			event.preventDefault();
-			handleScaleChangeScale(event.target.value);
-			document.querySelector(".resetBtn").classList.add("resetVisible");
-		});
-
-		function daysUntil(date) {
-			let targetDate;
-			if (typeof date === "string") {
-				const [year, month, day] = date.split("-").map(Number);
-				targetDate = new Date(year, month - 1, day); // Months are zero-based in JS
-			} else if (date instanceof Date) {
-				targetDate = date;
-			} else {
-				throw new Error(
-					"Invalid date format. Please provide a Date object or a string in YYYY-MM-DD format."
-				);
-			}
-			const today = new Date();
-			today.setHours(0, 0, 0, 0);
-			const timeDiff = targetDate - today;
-			const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-			return daysDiff;
-		}
-
-		function calculateDays(date) {
-			const days = daysUntil(date);
-			if (252 - days >= 0) {
-				setProgress(252 - days);
-			}
-		}
-		// Load the saved date from local storage or URL if provided
-		function loadSavedDate() {
-			// Check for dueDate in URL
-			const urlParams = new URLSearchParams(window.location.search);
-			const dueDateFromUrl = urlParams.get("dueDate");
-			let dateToUse;
-			if (dueDateFromUrl) {
-				// Format the due date from URL (expected format: YYYY-MM-DD)
-				const [year, month, day] = dueDateFromUrl.split("-").map(Number);
-				dateToUse = `${year}-${month
-				.toString()
-				.padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
-			} else {
-				const savedDate = localStorage.getItem("savedDate");
-				if (savedDate) {
-					dateToUse = savedDate;
-					updateUrlDueDate(dateToUse);
-				} else {
-					dateToUse = dateInput.value; // Default date if neither URL nor local storage has a value
-				}
-			}
-			// Set the input value to the chosen date and calculate the days
-			dateInput.value = dateToUse;
-			calculateDays(dateToUse);
-		}
-		// Function to update the dueDate parameter in the URL
-		function updateUrlDueDate(newDate) {
-			const url = new URL(window.location);
-			url.searchParams.set("dueDate", newDate);
-			window.history.replaceState({}, "", url);
-		}
-		// Store the date in local storage and update URL when the date is changed
-		dateInput.addEventListener("input", (event) => {
-			const dateValue = event.target.value;
-			localStorage.setItem("savedDate", dateValue);
-			updateUrlDueDate(dateValue);
-			calculateDays(dateValue);
-		});
-		// Load the saved date or dueDate from the URL when the page loads
-		loadSavedDate();
+		
+		
 		// Lightweight, cross-browser vector path data for weeks 4 through 40
 		// Cohesive, cross-browser vector path data for weeks 4 through 40 (24x24 viewBox)
 		const fruitData = {
@@ -782,6 +677,113 @@
 				path: "M12 2a1 1 0 0 1 1 1v1.5c2.2.3 4 1.8 4.5 4 1.2.5 2 1.7 2 3 0 1.8-1.2 3.3-2.8 3.8-.5 2.2-2.3 3.7-4.7 3.7s-4.2-1.5-4.7-3.7C5.7 14.8 4.5 13.3 4.5 11.5c0-1.3.8-2.5 2-3C7 6.3 8.8 4.8 11 4.5V3a1 1 0 0 1 1-1zm-3.5 4.5C7 6.5 6 7.8 6 9.5v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c0-1.2-.2-2.2-.5-3zm7 0c-.3.8-.5 1.8-.5 3v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c0-1.7-1-3-2.5-3z"
 			}
 		};
+		// Function to handle slider change
+		function handleScaleChangeScale(val) {
+			const percentage = val / 252;
+			const animations = document.querySelectorAll("#babyProgression animate");
+			const days = parseInt(val) + 28;
+			document.querySelector(".days").textContent = days;
+			updateWeeksDisplay(val);
+			// Change baby animations
+			animations.forEach((animation) => {
+				const duration = parseFloat(animation.getAttribute("dur")) || 50; // Default to 50 seconds if not specified
+				// Calculate the target time
+				let targetTime = duration * percentage;
+				if (targetTime <= 0) {
+					targetTime = 0.01;
+				}
+				if (targetTime >= 100) {
+					targetTime = 99.9;
+				}
+				// Set the current time of the animation
+				animation.ownerSVGElement.setCurrentTime(targetTime);
+				// Freeze the animation
+				animation.ownerSVGElement.pauseAnimations();
+			});
+		}
+
+		function setProgress(num) {
+			scaleSlider.value = num;
+			handleScaleChangeScale(num);
+		}
+		const weekBtns = document.querySelectorAll('.container button');
+		weekBtns.forEach((btn) => {
+			btn.addEventListener("click", (event) => {
+				document.querySelector(".resetBtn").classList.add("resetVisible");
+			});
+		});
+		// Attach event listener to the slider
+		scaleSlider.addEventListener("input", (event) => {
+			event.preventDefault();
+			handleScaleChangeScale(event.target.value);
+			document.querySelector(".resetBtn").classList.add("resetVisible");
+		});
+
+		function daysUntil(date) {
+			let targetDate;
+			if (typeof date === "string") {
+				const [year, month, day] = date.split("-").map(Number);
+				targetDate = new Date(year, month - 1, day); // Months are zero-based in JS
+			} else if (date instanceof Date) {
+				targetDate = date;
+			} else {
+				throw new Error(
+					"Invalid date format. Please provide a Date object or a string in YYYY-MM-DD format."
+				);
+			}
+			const today = new Date();
+			today.setHours(0, 0, 0, 0);
+			const timeDiff = targetDate - today;
+			const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+			return daysDiff;
+		}
+
+		function calculateDays(date) {
+			const days = daysUntil(date);
+			if (252 - days >= 0) {
+				setProgress(252 - days);
+			}
+		}
+		// Load the saved date from local storage or URL if provided
+		function loadSavedDate() {
+			// Check for dueDate in URL
+			const urlParams = new URLSearchParams(window.location.search);
+			const dueDateFromUrl = urlParams.get("dueDate");
+			let dateToUse;
+			if (dueDateFromUrl) {
+				// Format the due date from URL (expected format: YYYY-MM-DD)
+				const [year, month, day] = dueDateFromUrl.split("-").map(Number);
+				dateToUse = `${year}-${month
+				.toString()
+				.padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+			} else {
+				const savedDate = localStorage.getItem("savedDate");
+				if (savedDate) {
+					dateToUse = savedDate;
+					updateUrlDueDate(dateToUse);
+				} else {
+					dateToUse = dateInput.value; // Default date if neither URL nor local storage has a value
+				}
+			}
+			// Set the input value to the chosen date and calculate the days
+			dateInput.value = dateToUse;
+			calculateDays(dateToUse);
+		}
+		// Function to update the dueDate parameter in the URL
+		function updateUrlDueDate(newDate) {
+			const url = new URL(window.location);
+			url.searchParams.set("dueDate", newDate);
+			window.history.replaceState({}, "", url);
+		}
+		// Store the date in local storage and update URL when the date is changed
+		dateInput.addEventListener("input", (event) => {
+			const dateValue = event.target.value;
+			localStorage.setItem("savedDate", dateValue);
+			updateUrlDueDate(dateValue);
+			calculateDays(dateValue);
+		});
+		// Load the saved date or dueDate from the URL when the page loads
+		loadSavedDate();
 
 		function updateFruitComparison(weeks) {
 			const fruitTextEl = document.getElementById("fruitText");
